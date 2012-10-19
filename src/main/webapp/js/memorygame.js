@@ -1,3 +1,4 @@
+
 var memorygame = {
     lastTappedItemIndex: -1,
     imageToHide1: null,
