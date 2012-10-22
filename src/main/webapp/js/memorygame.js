@@ -35,9 +35,10 @@ var memorygame = {
                     memorygame.pairsMatched = memorygame.pairsMatched + 1;
                     
                     if (memorygame.pairsMatched == 8) {
+                         tactile.page.getComponent('elpminutes').elem.innerHTML = tactile.page.getComponent('minutes').elem.innerHTML;
+                        tactile.page.getComponent('elpseconds').elem.innerHTML = tactile.page.getComponent('seconds').elem.innerHTML;
                         tactile.page.getComponent('maskinglayer').show();
                         tactile.page.getComponent('gameover').show();
-                    //tactile.page.getComponent('gameoverview').show();
                     }
                 } else {
                     memorygame.taplimit--;

@@ -13,7 +13,7 @@
                     </PLAINHTML>
                 </view>
             </layout>
-            <layout id="titlebar" class="titlebar" height="Math.round(parent.height)" width="landscape:Math.round(parent.width*.25),portrait:Math.round(parent.width*.6)" top="landscape:Math.round(parent.height*.05),portrait:Math.round(parent.height*.025)" left="landscape:Math.round(parent.width*.70),portrait:Math.round(parent.width*.45)" >
+            <layout id="titlebar" class="titlebar" height="Math.round(parent.height)" width="landscape:Math.round(parent.width*.25),portrait:Math.round(parent.width*.6)" top="landscape:Math.round(parent.height*.05),portrait:Math.round(parent.height*.025)" left="landscape:Math.round(parent.width*.70),portrait:Math.round(parent.width*.35)" >
                 <view id="titlebarview" class="titlebar" height="100%" width="100%" float="right" >
                     <IMAGE id="logo" >
                     <img src="images/pixel.jpg" altsrc="images/nb_logo.jpg" format="jpg"/>
@@ -48,7 +48,14 @@
             <view id="gameoverview" class="gameover" height="100%" width="100%" ontap="#memorygame.gameOverTapped()">
                 <TEXT>
                 <styles><style name="color" value="#000000"/></styles>
-                <richtext>[br][b]Congratulations: You Won![/b][p]Tap here to play another game.[/p]</richtext>
+                <richtext>[br][b]Congratulations, You won![/b]</richtext>
+                </TEXT>
+                <PLAINHTML>
+                    <span id="elapsedtime">Elapsed time: <span id="elpminutes">00</span>minutes, <span id="elpseconds">00</span> seconds</span>
+                </PLAINHTML>
+                <TEXT>
+                <styles><style name="color" value="#000000"/></styles>
+                <richtext>[br][p]Tap here to play another game.[/p]</richtext>
                 </TEXT>
             </view>
         </layout>
