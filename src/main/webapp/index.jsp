@@ -40,5 +40,13 @@
                 </TEXT>
             </view>
         </layout>
+        <layout id="gamelost" class="gameover" height="60%" width="80%" top="Math.round(parent.height*.2)" left="Math.round(parent.width*.1)" display="none" zindex="2000" effect-type="slide" effect-duration="3000" effect-transition="easeInOut">
+            <view id="gamelostview" class="gameover" height="100%" width="100%" ontap="#memorygame.gameLostTapped()">
+                <TEXT>
+                    <styles><style name="color" value="#000000"/></styles>
+                    <richtext>[br][b]Unfortunately, you lost![/b][p]Tap here to play again.[/p]</richtext>
+                </TEXT>
+            </view>
+        </layout>
     </layout>
 </page>

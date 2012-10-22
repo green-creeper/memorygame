@@ -1,5 +1,6 @@
 
 var memorygame = {
+    taplimit: 20,
     lastTappedItemIndex: -1,
     imageToHide1: null,
     imageToHide2: null,
@@ -37,6 +38,11 @@ var memorygame = {
                         //tactile.page.getComponent('gameoverview').show();
                     }
                 } else {
+                    memorygame.taplimit--;
+                    if(memorygame.taplimit==0){
+                        tactile.page.getComponent('maskinglayer').show();
+                        tactile.page.getComponent('gamelost').show();
+                    }
                     memorygame.imageToHide1 = tappedItem;
                     memorygame.imageToHide2 = tactile.page.getComponent("photogrid" + memorygame.lastTappedItemIndex);
                 }
@@ -57,6 +63,10 @@ var memorygame = {
     },
     
     gameOverTapped : function() {
+        window.location.href = window.location.href;
+    },
+    
+    gameLostTapped : function() {
         window.location.href = window.location.href;
     }
 }
