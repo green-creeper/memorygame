@@ -1,5 +1,5 @@
 .root {
-    background-color: #333333;
+    background-color: #333;
 }
 
 .gamefield {
@@ -7,7 +7,7 @@
 }
 
 .titlebar {
-    background-color: #ff0000;
+    background-color: #FFF;
 }
 
 .footerbar {
@@ -49,6 +49,14 @@
     font-family: "Helvetica";
     font-size: 1.4em;
     text-align: center;
+}
+.timeportrait{
+    font-size: 28px;
+    font-weight: bold;
+}
+.timelandscape{
+    font-size: 18px;
+    font-weight: bold;
 }
 /*
 #gameoverview {
