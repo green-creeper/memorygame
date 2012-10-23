@@ -35,16 +35,17 @@ var memorygame = {
                     memorygame.pairsMatched = memorygame.pairsMatched + 1;
                     
                     if (memorygame.pairsMatched == 8) {
-                         tactile.page.getComponent('elpminutes').elem.innerHTML = tactile.page.getComponent('minutes').elem.innerHTML;
+                        tactile.page.getComponent('elpminutes').elem.innerHTML = tactile.page.getComponent('minutes').elem.innerHTML;
                         tactile.page.getComponent('elpseconds').elem.innerHTML = tactile.page.getComponent('seconds').elem.innerHTML;
                         tactile.page.getComponent('maskinglayer').show();
                         tactile.page.getComponent('gameover').show();
                     }
                 } else {
+                    //Decrease taplimit if pair don't match
                     memorygame.taplimit--;
+                    //Taplimit exeeded
                     if(memorygame.taplimit==0){
-                        tactile.page.getComponent('maskinglayer').show();
-                        tactile.page.getComponent('gamelost').show();
+                        memorygame.gameLost();
                     }
                     memorygame.imageToHide1 = tappedItem;
                     memorygame.imageToHide2 = tactile.page.getComponent("photogrid" + memorygame.lastTappedItemIndex);
@@ -57,7 +58,7 @@ var memorygame = {
     newGame : function() {
         memorygame.imageArray.sort(function() {
             return 0.5 - Math.random()
-            });
+        });
         
         for (n = 0; n < 16; n++) {
             var photo = tactile.page.getComponent("photo" + (n+1));
@@ -66,7 +67,10 @@ var memorygame = {
         memorygame.startTimer();
         tactile.foundation.ImageScaler.run();
     },
-    
+    gameLost : function() {
+        tactile.page.getComponent('maskinglayer').show();
+        tactile.page.getComponent('gamelost').show();
+    },
     gameOverTapped : function() {
         window.location.href = window.location.href;
     },
@@ -75,6 +79,7 @@ var memorygame = {
         window.location.href = window.location.href;
     },
     
+    //Count up timer of elapsed time
     startTimer: function(){
         function pad(val)
         {
@@ -95,6 +100,10 @@ var memorygame = {
         setInterval(function()
         {
             ++memorygame.totalSeconds;
+            //If game duration is 5 minutes, than game lost
+            if(memorygame.totalSeconds==300){
+                memorygame.gameLost();
+            }
             sec.elem.innerHTML = pad(memorygame.totalSeconds%60);
             min.elem.innerHTML = pad(parseInt(memorygame.totalSeconds/60));
         }
