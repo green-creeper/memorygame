@@ -10,6 +10,7 @@ var memorygame = {
     
     init: function() {
         memorygame.newGame();
+        memorygame.loadTweets();
     //tactile.EventManager.addResizeListener(rotated);
     },
 
@@ -79,6 +80,27 @@ var memorygame = {
         window.location.href = window.location.href;
     },
     
+    loadTweets : function() {
+        var ajax = new tactile.AjaxLoader();
+//         ajax.onstart.subscribe(function(response){
+//           // alert(response);
+//        });
+        ajax.load({
+            url: 'http://search.twitter.com/search.json',
+            method: 'GET',
+            params: 'q=netbiscuits&rpp=5&include_entities=false&result_type=recent',
+            isJSONP: true
+        });
+       
+        ajax.onsuccess.subscribe(function(response){
+            //@TODO implement content loading to flexview
+            //alert("onsucces: ", response);
+        });
+        ajax.onerror.subscribe(function(){
+            //@TODO implement error case
+            //alert("onerror: ",arguments);
+        });
+    },
     //Count up timer of elapsed time
     startTimer: function(){
         function pad(val)

@@ -1,7 +1,9 @@
 .root {
     background-color: #ddd;
 }
-
+.tweet {
+    background-color: #ddd;
+}
 .gamefield {
     background-color: #aaa;
 }

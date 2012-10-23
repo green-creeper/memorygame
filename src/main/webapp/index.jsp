@@ -22,8 +22,11 @@
             </layout>
         </layout>
         <layout id="sidebar" class="sidebar" height="Math.round(parent.height*.71)" width="Math.round(parent.width*.35)" top="Math.round(parent.height*.17)" left="Math.round(parent.width*.025)" visible="landscape:true,portrait:false">
-            <view id="sidebarview" class="sidebar" height="100%" width="100%" top="0" left="0">
-            </view>
+                <flexview width="Math.round(parent.width)" height="Math.round(parent.height*.95)" flexitems-height="Math.round(parent.height*.2)" flexitems-width="Math.round(parent.width*1)" flexitems-gap="5" scroll="true">
+                    <c:forEach var="i" begin="1" end="10">
+                        <item  id="tweet${i}" class="tweet"></item>
+                    </c:forEach>
+                </flexview>
         </layout>
         <layout id="playfield" width="landscape:Math.round(parent.height*.9),portrait:Math.round(parent.width*.9)" height="landscape:Math.round(parent.height*.9),portrait:Math.round(parent.width*.9)" top="landscape:Math.round(parent.height * .05),portrait:Math.round(parent.height * .15)" left="landscape:Math.round(parent.width * .4),portrait:Math.round(parent.width * .05)">
             <gridview id="gridview" class="gamefield" gridflow="horizontal" width="100%" height="100%" top="0" left="0" opacity="100" zindex="1" items-height="(parent.height - 25) * .25" items-width="(parent.height - 25) * .25" items-hgap="5" items-vgap="5">
