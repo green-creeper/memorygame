@@ -86,13 +86,13 @@ var memorygame = {
     
     loadTweets : function() {
         var ajax = new tactile.AjaxLoader();
-        ajax.onstart.subscribe(function(response){
-            //alert(response);
-            });
+//        ajax.onstart.subscribe(function(response){
+//            alert(response);
+//            });
         ajax.load({
-            url: 'http://search.twitter.com/search.json',
+            url: '/twitterfeed.json',
             method: 'GET',
-            params: 'q=#netbiscuitsmemorygame&rpp=5&include_entities=false&result_type=recent',
+            params: 'q=#netbiscuitsmemorygame&rpp=10&include_entities=false&result_type=recent',
             isJSONP: true
         });
        
