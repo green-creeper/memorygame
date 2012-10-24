@@ -4,6 +4,13 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" output-encoding="UTF-8" title="Memory Game" xsi:noNamespaceSchemaLocation="http://www.netbiscuits.com/schema/netbiscuits-tactile.xsd">
     <external type="css" file="css/memorygame.css"/>
     <external type="script" file="js/memorygame.js"/>
+    <SCRIPT>
+            <preserve>
+                function replaceSocialLinks(){
+                
+                }
+            </preserve>
+    </SCRIPT>
     <layout id="root" class="root" width="100%" height="100%" top="0" left="0">
         <layout class="titlebar" height="Math.round(parent.height*.1)" width="landscape:Math.round(parent.width*.35),portrait:Math.round(parent.width*.9)" top="landscape:Math.round(parent.height*.05),portrait:Math.round(parent.height*.025)" left="landscape:Math.round(parent.width*.025),portrait:Math.round(parent.width*.05)">
             <layout id="timerbar" class="timerbar" height="Math.round(parent.height*.5)" width="landscape:Math.round(parent.width*.2),portrait:Math.round(parent.width*.4)" top="Math.round(parent.height*.25)" left="landscape:Math.round(parent.width*.025),portrait:Math.round(parent.width*.05)">
@@ -22,11 +29,11 @@
             </layout>
         </layout>
         <layout id="sidebar" class="sidebar" height="Math.round(parent.height*.71)" width="Math.round(parent.width*.35)" top="Math.round(parent.height*.17)" left="Math.round(parent.width*.025)" visible="landscape:true,portrait:false">
-                <flexview width="Math.round(parent.width)" height="Math.round(parent.height*.95)" flexitems-height="Math.round(parent.height*.2)" flexitems-width="Math.round(parent.width*1)" flexitems-gap="5" scroll="true">
-                    <c:forEach var="i" begin="1" end="10">
-                        <item  id="tweet${i}" class="tweet"></item>
-                    </c:forEach>
-                </flexview>
+            <flexview width="Math.round(parent.width)" height="Math.round(parent.height*.95)" flexitems-height="Math.round(parent.height*.2)" flexitems-width="Math.round(parent.width*1)" flexitems-gap="5" scroll="true">
+                <c:forEach var="i" begin="1" end="10">
+                    <item  id="tweet${i}" class="tweet"></item>
+                </c:forEach>
+            </flexview>
         </layout>
         <layout id="playfield" width="landscape:Math.round(parent.height*.9),portrait:Math.round(parent.width*.9)" height="landscape:Math.round(parent.height*.9),portrait:Math.round(parent.width*.9)" top="landscape:Math.round(parent.height * .05),portrait:Math.round(parent.height * .15)" left="landscape:Math.round(parent.width * .4),portrait:Math.round(parent.width * .05)">
             <gridview id="gridview" class="gamefield" gridflow="horizontal" width="100%" height="100%" top="0" left="0" opacity="100" zindex="1" items-height="(parent.height - 25) * .25" items-width="(parent.height - 25) * .25" items-hgap="5" items-vgap="5">
@@ -48,7 +55,7 @@
         <layout id="maskinglayer" class="maskinglayer" height="parent.height" width="parent.width" zindex="1000" opacity="50" display="none">
         </layout>
         <layout id="gameover" class="gameover" height="60%" width="80%" top="Math.round(parent.height*.2)" left="Math.round(parent.width*.1)" display="none" zindex="2000" effect-type="slide" effect-duration="3000" effect-transition="easeInOut">
-            <view id="gameoverview" class="gameover" height="100%" width="100%" ontap="#memorygame.gameOverTapped()">
+            <view id="gameoverview" class="gameover" height="100%" width="100%" >
                 <TEXT>
                 <styles><style name="color" value="#000000"/></styles>
                 <richtext>[br][b]Congratulations, You won![/b]</richtext>
@@ -56,9 +63,13 @@
                 <PLAINHTML>
                     <span id="elapsedtime">Elapsed time: <span id="elpminutes">00</span>minutes, <span id="elpseconds">00</span> seconds</span>
                 </PLAINHTML>
-                <TEXT>
+                <SHARE id="sharegame" orientation="horizontal" style="large" counters="true" socialnetworks="facebook, twitter, googleplus">
+                    <url id="shareurl">REPLACEURL</url>
+                    <text id="sharetext">REPLACETXT</text>
+                </SHARE>
+                <TEXT ontap="#memorygame.gameOverTapped()">
                 <styles><style name="color" value="#000000"/></styles>
-                <richtext>[br][p]Tap here to play another game.[/p]</richtext>
+                <richtext>[br][br][p]Tap here to play another game.[/p]</richtext>
                 </TEXT>
             </view>
         </layout>
@@ -66,7 +77,7 @@
             <view id="gamelostview" class="gameover" height="100%" width="100%" ontap="#memorygame.gameLostTapped()">
                 <TEXT>
                 <styles><style name="color" value="#000000"/></styles>
-                <richtext>[br][b]Unfortunately, you lost![/b][p]Tap here to play again.[/p]</richtext>
+                <richtext>[br][b]Unfortunately, you lost![/b][br][br][p]Tap here to play again.[/p]</richtext>
                 </TEXT>
             </view>
         </layout>

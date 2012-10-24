@@ -36,8 +36,12 @@ var memorygame = {
                     memorygame.pairsMatched = memorygame.pairsMatched + 1;
                     
                     if (memorygame.pairsMatched == 8) {
-                        tactile.page.getComponent('elpminutes').elem.innerHTML = tactile.page.getComponent('minutes').elem.innerHTML;
-                        tactile.page.getComponent('elpseconds').elem.innerHTML = tactile.page.getComponent('seconds').elem.innerHTML;
+                        m = tactile.page.getComponent('minutes').elem.innerHTML;
+                        s = tactile.page.getComponent('seconds').elem.innerHTML;
+                        tactile.page.getComponent('elpminutes').elem.innerHTML = m;
+                        tactile.page.getComponent('elpseconds').elem.innerHTML = s;
+                        tactile.page.getComponent('sharegame').elem.innerHTML = tactile.page.getComponent('sharegame').elem.innerHTML.replace("REPLACEURL", window.location, "g");
+                        tactile.page.getComponent('sharegame').elem.innerHTML = tactile.page.getComponent('sharegame').elem.innerHTML.replace("REPLACETXT", encodeURIComponent("“I just beat the #netbiscuitsmemorygame in " + m + " minutes "+s+" seconds moves, play here!"), "g");
                         tactile.page.getComponent('maskinglayer').show();
                         tactile.page.getComponent('gameover').show();
                     }
@@ -82,24 +86,24 @@ var memorygame = {
     
     loadTweets : function() {
         var ajax = new tactile.AjaxLoader();
-//         ajax.onstart.subscribe(function(response){
-//           // alert(response);
-//        });
+        ajax.onstart.subscribe(function(response){
+            //alert(response);
+            });
         ajax.load({
             url: 'http://search.twitter.com/search.json',
             method: 'GET',
-            params: 'q=netbiscuits&rpp=5&include_entities=false&result_type=recent',
+            params: 'q=#netbiscuitsmemorygame&rpp=5&include_entities=false&result_type=recent',
             isJSONP: true
         });
        
         ajax.onsuccess.subscribe(function(response){
             //@TODO implement content loading to flexview
             //alert("onsucces: ", response);
-        });
+            });
         ajax.onerror.subscribe(function(){
             //@TODO implement error case
             //alert("onerror: ",arguments);
-        });
+            });
     },
     //Count up timer of elapsed time
     startTimer: function(){
