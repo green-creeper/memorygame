@@ -4,6 +4,12 @@
 .tweet {
     background-color: #ddd;
 }
+.innerTweet {
+    padding: 5px 5px 5px 10px;
+}
+.innerTweet img{
+    padding-right: 10px;
+}
 .gamefield {
     background-color: #aaa;
 }
