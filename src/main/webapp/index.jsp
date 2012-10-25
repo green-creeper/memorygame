@@ -79,5 +79,17 @@
                 </TEXT>
             </view>
         </layout>
+        <layout id="loading" class="gameover" height="40%" width="80%" top="Math.round(parent.height*.2)" left="Math.round(parent.width*.1)" display="none" zindex="2000">
+            <view id="loadingview" class="gameover" height="100%" width="100%">
+
+                <TEXT>
+                <styles><style name="color" value="#000000"/></styles>
+                <richtext>[br][br][b]Loading... please wait a few seconds[/b]</richtext>
+                </TEXT>
+                <IMAGE id="load" >
+                <img src="images/ajax-loader.gif" format="gif"/>
+                </IMAGE>
+            </view>
+        </layout>
     </layout>
 </page>
