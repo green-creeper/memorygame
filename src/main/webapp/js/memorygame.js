@@ -1,4 +1,6 @@
-
+//tactile.logger.setConfig({
+// 	level: tactile.logger.level.info
+// });
 var memorygame = {
     taplimit: 20,
     totalSeconds: 0,
@@ -85,25 +87,33 @@ var memorygame = {
     },
     
     loadTweets : function() {
+        function appendTweet(id, content, imgUrl){
+            var div = document.createElement("div");
+            div.id = id;
+            div.className = "tweet";
+            div.innerHTML = "<div class='innerTweet'><img src='"+imgUrl+"'/>"+content+"</div>";
+            tactile.page.getComponent("tweetfeed").append(
+                new tactile.FlexItem(div, {
+                    parent: tactile.page.getComponent("tweetfeed")
+                })
+                );
+        }
         var ajax = new tactile.AjaxLoader();
-//        ajax.onstart.subscribe(function(response){
-//            alert(response);
-//            });
         ajax.load({
-            url: '/twitterfeed.json',
+            url: 'twitterfeed.jsp',
             method: 'GET',
-            params: 'q=#netbiscuitsmemorygame&rpp=10&include_entities=false&result_type=recent',
-            isJSONP: true
+            params: ''
         });
        
         ajax.onsuccess.subscribe(function(response){
-            //@TODO implement content loading to flexview
-            //alert("onsucces: ", response);
+            tweets = eval('('+response.loader.getResponseText()+')');
+            for(i=0; i< tweets.results.length; i++){
+                appendTweet("tweet"+i, tweets.results[i].text, tweets.results[i].profile_image_url);
+            }
             });
         ajax.onerror.subscribe(function(){
-            //@TODO implement error case
-            //alert("onerror: ",arguments);
-            });
+            appendTweet("error1", "Something went wrong. Can't load feed", "");
+        });
     },
     //Count up timer of elapsed time
     startTimer: function(){

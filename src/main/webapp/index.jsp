@@ -4,13 +4,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" output-encoding="UTF-8" title="Memory Game" xsi:noNamespaceSchemaLocation="http://www.netbiscuits.com/schema/netbiscuits-tactile.xsd">
     <external type="css" file="css/memorygame.css"/>
     <external type="script" file="js/memorygame.js"/>
-    <SCRIPT>
-            <preserve>
-                function replaceSocialLinks(){
-                
-                }
-            </preserve>
-    </SCRIPT>
     <layout id="root" class="root" width="100%" height="100%" top="0" left="0">
         <layout class="titlebar" height="Math.round(parent.height*.1)" width="landscape:Math.round(parent.width*.35),portrait:Math.round(parent.width*.9)" top="landscape:Math.round(parent.height*.05),portrait:Math.round(parent.height*.025)" left="landscape:Math.round(parent.width*.025),portrait:Math.round(parent.width*.05)">
             <layout id="timerbar" class="timerbar" height="Math.round(parent.height*.5)" width="landscape:Math.round(parent.width*.2),portrait:Math.round(parent.width*.4)" top="Math.round(parent.height*.25)" left="landscape:Math.round(parent.width*.025),portrait:Math.round(parent.width*.05)">
@@ -29,10 +22,11 @@
             </layout>
         </layout>
         <layout id="sidebar" class="sidebar" height="Math.round(parent.height*.71)" width="Math.round(parent.width*.35)" top="Math.round(parent.height*.17)" left="Math.round(parent.width*.025)" visible="landscape:true,portrait:false">
-            <flexview width="Math.round(parent.width)" height="Math.round(parent.height*.95)" flexitems-height="Math.round(parent.height*.2)" flexitems-width="Math.round(parent.width*1)" flexitems-gap="5" scroll="true">
-                <c:forEach var="i" begin="1" end="10">
+            <flexview id="tweetfeed" width="Math.round(parent.width)" height="Math.round(parent.height*.95)" flexitems-height="Math.round(parent.height*.2)" flexitems-width="Math.round(parent.width*1)" flexitems-gap="5" scroll="true">
+                
+                <!--<cforEach var="i" begin="1" end="10">
                     <item  id="tweet${i}" class="tweet"></item>
-                </c:forEach>
+                </cforEach>-->
             </flexview>
         </layout>
         <layout id="playfield" width="landscape:Math.round(parent.height*.9),portrait:Math.round(parent.width*.9)" height="landscape:Math.round(parent.height*.9),portrait:Math.round(parent.width*.9)" top="landscape:Math.round(parent.height * .05),portrait:Math.round(parent.height * .15)" left="landscape:Math.round(parent.width * .4),portrait:Math.round(parent.width * .05)">
