@@ -23,7 +23,7 @@
         </layout>
         <layout id="sidebar" class="sidebar" height="Math.round(parent.height*.71)" width="Math.round(parent.width*.35)" top="Math.round(parent.height*.17)" left="Math.round(parent.width*.025)" visible="landscape:true,portrait:false">
             <flexview id="tweetfeed" width="Math.round(parent.width)" height="Math.round(parent.height*.95)" flexitems-height="Math.round(parent.height*.2)" flexitems-width="Math.round(parent.width*1)" flexitems-gap="5" scroll="true">
-                
+
                 <!--<cforEach var="i" begin="1" end="10">
                     <item  id="tweet${i}" class="tweet"></item>
                 </cforEach>-->
@@ -35,7 +35,7 @@
                     <item id="item${i}" class="photoback" ontap="#memorygame.photoTapped('photogrid${i}')">
                         <view id="photogrid${i}" class="loadingmask" width="100%" height="100%" display="none">
                             <IMAGE id="photo${i}">
-                            <img src="images/pixel.jpg" altsrc="images/GAMEPIECE" format="jpg"/>
+                            <img src="images/pixel.jpg" altsrc="GAMEPIECE" format="jpg"/>
                             </IMAGE>
                         </view>
                     </item>
@@ -61,11 +61,15 @@
                     <url id="shareurl">REPLACEURL</url>
                     <text id="sharetext">REPLACETXT</text>
                 </SHARE>
-                <TEXT ontap="#memorygame.gameOverTapped()">
-                <styles><style name="color" value="#000000"/></styles>
-                <richtext>[br][br][p]Tap here to play another game.[/p]</richtext>
-                </TEXT>
             </view>
+            <layout width="100%" height="50%" top="Math.round(parent.height*.8)" left="0">
+                <view  height="100%" width="100%" ontap="#memorygame.gameOverTapped()">
+                    <TEXT>
+                    <styles><style name="color" value="#000000"/></styles>
+                    <richtext>[br][br][p]Tap here to play another game.[/p]</richtext>
+                    </TEXT>
+                </view>
+            </layout>
         </layout>
         <layout id="gamelost" class="gameover" height="60%" width="80%" top="Math.round(parent.height*.2)" left="Math.round(parent.width*.1)" display="none" zindex="2000" effect-type="slide" effect-duration="3000" effect-transition="easeInOut">
             <view id="gamelostview" class="gameover" height="100%" width="100%" ontap="#memorygame.gameLostTapped()">

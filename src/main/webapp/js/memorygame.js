@@ -7,14 +7,17 @@ var memorygame = {
     lastTappedItemIndex: -1,
     imageToHide1: null,
     imageToHide2: null,
-    imageArray: ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg", "image6.jpg", "image7.jpg", "image8.jpg", "image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg", "image6.jpg", "image7.jpg", "image8.jpg"],
+    //imageArray: ["image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg", "image6.jpg", "image7.jpg", "image8.jpg", "image1.jpg", "image2.jpg", "image3.jpg", "image4.jpg", "image5.jpg", "image6.jpg", "image7.jpg", "image8.jpg"],
+    imageArray: [],
+    instaArray:[],
     pairsMatched: 0,
     
     init: function() {
-        memorygame.newGame();
-        memorygame.loadTweets();
         memorygame.loadImages();
-        //tactile.EventManager.addResizeListener(rotated);
+        
+        memorygame.loadTweets();
+        
+    //tactile.EventManager.addResizeListener(rotated);
     },
 
     photoTapped: function(itemId) {
@@ -64,6 +67,7 @@ var memorygame = {
     },
     
     newGame : function() {
+       
         memorygame.imageArray.sort(function() {
             return 0.5 - Math.random()
         });
@@ -95,10 +99,10 @@ var memorygame = {
             div.className = "tweet";
             div.innerHTML = "<div class='innerTweet'><img src='"+imgUrl+"'/>"+content+"</div>";
             tactile.page.getComponent("tweetfeed").append(
-            new tactile.FlexItem(div, {
-                parent: tactile.page.getComponent("tweetfeed")
-            })
-        );
+                new tactile.FlexItem(div, {
+                    parent: tactile.page.getComponent("tweetfeed")
+                })
+                );
         }
         var ajax = new tactile.AjaxLoader();
         ajax.load({
@@ -127,11 +131,17 @@ var memorygame = {
         });
         
         ajax.onsuccess.subscribe(function(response){
-            alert('success');
+            photos = eval('('+response.loader.getResponseText()+')');
+            for(i=0; i<8; i++){
+                imgurl = photos.data[i].images.low_resolution.url;
+                memorygame.imageArray[i]= imgurl;
+                memorygame.imageArray[15-i] = imgurl;
+            }
+            memorygame.newGame();
         });
         
         ajax.onerror.subscribe(function(){
-            alert('error');
+            console.log('error', attributes);
         });
     },
     //Count up timer of elapsed time
@@ -164,14 +174,14 @@ var memorygame = {
         }
         , 1000);
     }
-    //    rotated : function(){
-    //        var time = tactile.page.getComponent("time");
-    //        if(e.width > e.height){
-    //            time.swapClass("timeportrait", "timelandscape");
-    //        } else{
-    //            time.swapClass("timelandscape", "timeportrait");
-    //        }
-    //    }
+//    rotated : function(){
+//        var time = tactile.page.getComponent("time");
+//        if(e.width > e.height){
+//            time.swapClass("timeportrait", "timelandscape");
+//        } else{
+//            time.swapClass("timelandscape", "timeportrait");
+//        }
+//    }
 }
 
 tactile.page.onready(memorygame.init);
