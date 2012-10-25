@@ -13,7 +13,8 @@ var memorygame = {
     init: function() {
         memorygame.newGame();
         memorygame.loadTweets();
-    //tactile.EventManager.addResizeListener(rotated);
+        memorygame.loadImages();
+        //tactile.EventManager.addResizeListener(rotated);
     },
 
     photoTapped: function(itemId) {
@@ -87,16 +88,17 @@ var memorygame = {
     },
     
     loadTweets : function() {
+        //Add tweets to flex view
         function appendTweet(id, content, imgUrl){
             var div = document.createElement("div");
             div.id = id;
             div.className = "tweet";
             div.innerHTML = "<div class='innerTweet'><img src='"+imgUrl+"'/>"+content+"</div>";
             tactile.page.getComponent("tweetfeed").append(
-                new tactile.FlexItem(div, {
-                    parent: tactile.page.getComponent("tweetfeed")
-                })
-                );
+            new tactile.FlexItem(div, {
+                parent: tactile.page.getComponent("tweetfeed")
+            })
+        );
         }
         var ajax = new tactile.AjaxLoader();
         ajax.load({
@@ -110,9 +112,26 @@ var memorygame = {
             for(i=0; i< tweets.results.length; i++){
                 appendTweet("tweet"+i, tweets.results[i].text, tweets.results[i].profile_image_url);
             }
-            });
+        });
         ajax.onerror.subscribe(function(){
             appendTweet("error1", "Something went wrong. Can't load feed", "");
+        });
+    },
+    
+    loadImages: function(){
+        var ajax = new tactile.AjaxLoader();
+        ajax.load({
+            url: 'instagram.jsp',
+            method: 'GET',
+            params: ''
+        });
+        
+        ajax.onsuccess.subscribe(function(response){
+            alert('success');
+        });
+        
+        ajax.onerror.subscribe(function(){
+            alert('error');
         });
     },
     //Count up timer of elapsed time
@@ -145,14 +164,14 @@ var memorygame = {
         }
         , 1000);
     }
-//    rotated : function(){
-//        var time = tactile.page.getComponent("time");
-//        if(e.width > e.height){
-//            time.swapClass("timeportrait", "timelandscape");
-//        } else{
-//            time.swapClass("timelandscape", "timeportrait");
-//        }
-//    }
+    //    rotated : function(){
+    //        var time = tactile.page.getComponent("time");
+    //        if(e.width > e.height){
+    //            time.swapClass("timeportrait", "timelandscape");
+    //        } else{
+    //            time.swapClass("timelandscape", "timeportrait");
+    //        }
+    //    }
 }
 
 tactile.page.onready(memorygame.init);
